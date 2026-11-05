@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПРОТИВОГАЗЫ ОПТОМ - магазин телефонов и не только</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Comic Sans MS", "MS Comic Sans", cursive;
+    background: #003300 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='none'/%3E%3C/svg%3E");
+    background-color: #001a00;
+    color: #00ff00;
+    cursor: crosshair;
+  }
+  marquee {
+    background: #ffcc00;
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 6px 0;
+    border-bottom: 4px dashed #ff00ff;
+  }
+  header {
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(#ff00ff, #00ffff);
+    border-bottom: 8px ridge #ffff00;
+  }
+  h1 {
+    margin: 0;
+    font-size: 40px;
+    color: #ffff00;
+    text-shadow: 4px 4px 0 #ff0000, 8px 8px 0 #0000ff;
+    letter-spacing: 2px;
+  }
+  .sub { color: #000; font-size: 18px; font-weight: bold; }
+  .blink { animation: blink 0.7s step-start infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .ticker { background:#000; color:#0f0; font-family: monospace; padding:4px; font-size:14px; border-bottom:2px dotted #0f0; }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 16px; }
+
+  .bar {
+    display:flex; align-items:center; justify-content:space-between;
+    background:#000080; border:3px outset #00ffff; padding:8px 12px; margin-bottom:16px;
+  }
+  .bar b { color:#ffff00; }
+  #cart-count { color:#ff0000; background:#ffff00; padding:0 6px; border:2px inset #0f0; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: #c0c0c0;
+    border: 4px outset #ffffff;
+    color: #000;
+    padding: 10px;
+    text-align:center;
+    position: relative;
+  }
+  .card:hover { background:#e0e0e0; border-style:inset; }
+  .card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border: 3px inset #808080;
+    background:#fff;
+    image-rendering: pixelated;
+  }
+  .card h3 { margin: 8px 0 4px; font-size: 18px; color:#800000; text-transform: uppercase; }
+  .price { font-size: 20px; color: #ff0000; font-weight: bold; }
+  .old { text-decoration: line-through; color:#555; font-size:14px; }
+  .badge {
+    position:absolute; top:-10px; left:-10px; background:#ff0000; color:#fff;
+    font-size:12px; padding:3px 8px; transform: rotate(-15deg); border:2px solid #fff;
+  }
+  button {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    background: #00ff00;
+    color: #000;
+    border: 3px outset #00aa00;
+    padding: 6px 12px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  button:active { border-style: inset; }
+  button:disabled { background:#888; border-color:#666; cursor:not-allowed; }
+
+  .footer {
+    text-align:center; padding:20px; color:#00ff00; font-size:13px;
+    border-top:4px dashed #ff00ff; margin-top:20px;
+  }
+  .counter { background:#000; color:#0f0; border:2px inset #0f0; padding:2px 8px; font-family:monospace; }
+
+  #cart-panel {
+    background:#000; border:3px groove #ffff00; padding:12px; margin-bottom:16px; display:none;
+  }
+  #cart-panel h2 { color:#ffff00; margin:0 0 8px; }
+  #cart-list { list-style:none; padding:0; margin:0 0 8px; }
+  #cart-list li { border-bottom:1px dotted #0f0; padding:4px 0; font-family:monospace; font-size:14px; }
+  #cart-total { color:#ff0000; background:#ffff00; font-weight:bold; padding:2px 6px; }
+
+  a { color:#00ffff; }
+</style>
+</head>
+<body>
+
+<marquee behavior="alternate" scrollamount="12">!!! СКИДКИ ДО 200% !!! ЗВОНИ ПРЯМО СЕЙЧАС !!! ПРОТИВОГАЗЫ ДЕШЕВЛЕ ЧЕМ В МАГАЗИНЕ !!!</marquee>
+
+<header>
+  <h1>ПРОТИВОГАЗЫ ОПТОМ</h1>
+  <div class="sub">магазин телефонов <span class="blink">и не только</span> | г. Нерехта, 3-й подвал</div>
+</header>
+
+<div class="ticker">СЕГОДНЯ В НАЛИЧИИ: 6 моделей | доставка голубем | оплата наличными при получении</div>
+
+<main>
+  <div class="bar">
+    <b>Корзина: <span id="cart-count">0</span> шт.</b>
+    <span>Посетителей на сайте: <span class="counter" id="visitors">1337</span></span>
+    <button id="toggle-cart" onclick="toggleCart()">ОТКРЫТЬ КОРЗИНУ</button>
+  </div>
+
+  <div id="cart-panel">
+    <h2>ТВОЯ КОРЗИНА</h2>
+    <ul id="cart-list"><li>Пока пусто...</li></ul>
+    <div>Итого: <span id="cart-total">0 руб.</span></div>
+    <button onclick="checkout()">ОФОРМИТЬ ЗАКАЗ</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="footer">
+    <p>© 1998-2026 ПРОТИВОГАЗЫ ОПТОМ. Все права защищены и закопаны.</p>
+    <p>Сайт лучшего качества. Работает на честном слове.</p>
+    <marquee direction="right" scrollamount="6" style="color:#ff00ff;">СПАСИБО ЗА ПОКУПКУ! ВОЗВРАТ НЕ ПРЕДУСМОТРЕН!</marquee>
+  </div>
+</main>
+
+<script>
+  const products = [
+    { id: 1, name: "Противогаз ГП-7", img: "img/gp7.jpg", price: 4500, old: 9999, badge: "ХИТ" },
+    { id: 2, name: "Противогаз ГП-5М", img: "img/gp5m.jpg", price: 3200, old: 5000, badge: "" },
+    { id: 3, name: "Противогаз ГП-21", img: "img/gp21.jpg", price: 6100, old: 8000, badge: "НОВИНКА" },
+    { id: 4, name: "ШМС", img: "img/shms.jpg", price: 2800, old: 4000, badge: "ДЁШЕВО" },
+    { id: 5, name: "Нерехта", img: "img/ppm.jpg", price: 3990, old: 4990, badge: "ЭКСКЛЮЗИВ" },
+    { id: 6, name: "Кремний 2БЛ", img: "img/filter.jpg", price: 1500, old: 2200, badge: "" },
+  ];
+
+  const cart = {};
+
+  function render() {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = products.map(p => `
+      <div class="card">
+        ${p.badge ? `<div class="badge">${p.badge}</div>` : ""}
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        <h3>${p.name}</h3>
+        <div class="price">${p.price} руб. ${p.old ? `<span class="old">${p.old}</span>` : ""}</div>
+        <button onclick="addToCart(${p.id})">КУПИТЬ</button>
+      </div>
+    `).join("");
+  }
+
+  function addToCart(id) {
+    cart[id] = (cart[id] || 0) + 1;
+    updateCartUI();
+    flash();
+  }
+
+  function updateCartUI() {
+    const count = Object.values(cart).reduce((a, b) => a + b, 0);
+    document.getElementById("cart-count").textContent = count;
+
+    const list = document.getElementById("cart-list");
+    const items = Object.entries(cart);
+    if (items.length === 0) {
+      list.innerHTML = "<li>Пока пусто...</li>";
+    } else {
+      list.innerHTML = items.map(([id, qty]) => {
+        const p = products.find(x => x.id == id);
+        return `<li>${p.name} x${qty} — ${p.price * qty} руб. <button style="font-size:11px;padding:2px 6px;" onclick="removeFromCart(${id})">X</button></li>`;
+      }).join("");
+    }
+    const total = items.reduce((sum, [id, qty]) => sum + products.find(x => x.id == id).price * qty, 0);
+    document.getElementById("cart-total").textContent = total + " руб.";
+  }
+
+  function removeFromCart(id) {
+    delete cart[id];
+    updateCartUI();
+  }
+
+  function toggleCart() {
+    const panel = document.getElementById("cart-panel");
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  }
+
+  function checkout() {
+    const count = Object.values(cart).reduce((a, b) => a + b, 0);
+    if (count === 0) { alert("Корзина ПУСТАЯ!!! Положи хотя бы противогаз!"); return; }
+    alert("Заказ принят! Курьер выехал из Нерехты. Ожидайте 3-40 рабочих дней.");
+    for (const k in cart) delete cart[k];
+    updateCartUI();
+  }
+
+  function flash() {
+    document.body.style.background = "#330000";
+    setTimeout(() => document.body.style.background = "", 120);
+  }
+
+  // Счётчик "посетителей" ради атмосферы
+  setInterval(() => {
+    const el = document.getElementById("visitors");
+    let v = parseInt(el.textContent, 10) + Math.floor(Math.random() * 5) + 1;
+    el.textContent = v;
+  }, 2000);
+
+  render();
+  updateCartUI();
+</script>
+</body>
+</html>
